@@ -9,7 +9,7 @@ fun main() {
         val id = it[1].substring(0, it[1].length).toInt()
         val map = mutableMapOf<String, Int>()
         for(i in 2 until it.size step 2) {
-            map.put(it[i+1], max(it[i].toInt(), map.getOrDefault(it[i+1], 0)))
+            map[it[i+1]] = max(it[i].toInt(), map.getOrDefault(it[i+1], 0))
         }
         if(map.getOrDefault("red", 0) <= 12
             && map.getOrDefault("green", 0) <= 13
