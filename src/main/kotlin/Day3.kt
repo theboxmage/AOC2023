@@ -10,11 +10,11 @@ fun main(){
         text[i].indexesOf("\\d+").forEach{indexNumbers[Pair(it.first, i)] = it.second}
         text[i].indexesOf("\\*").forEach{maybeGears[Pair(it.first, i)] = 0}
     }
-//    println(indexNumbers.filter{
-//        number ->
-//        indexSymbols.any{symbol -> adjacent(number.key, symbol.key, number.value)}}
-//        .map{text[it.key.second].substring(it.key.first,it.key.first+it.value)}.sumOf { it.toInt() }
-//    )
+    println(indexNumbers.filter{
+        number ->
+        indexSymbols.any{symbol -> adjacent(number.key, symbol.key, number.value)}}
+        .map{text[it.key.second].substring(it.key.first,it.key.first+it.value)}.sumOf { it.toInt() }
+    )
     var part2 = 0L
     maybeGears.forEach {gear ->
         val count = indexNumbers.filter{adjacent(it.key, gear.key, it.value)}
