@@ -5,7 +5,7 @@ fun main(){
     val indexSymbols = mutableMapOf<Pair<Int, Int>, Int>()
     val indexNumbers =  mutableMapOf<Pair<Int, Int>, Int>()
     val  maybeGears = mutableMapOf<Pair<Int, Int>, Int>()
-    for(i in 0 until text.size) {
+    for(i in text.indices) {
         text[i].indexesOf("[^.0-9]").forEach{indexSymbols[Pair(it.first, i)] = 1}
         text[i].indexesOf("\\d+").forEach{indexNumbers[Pair(it.first, i)] = it.second}
         text[i].indexesOf("\\*").forEach{maybeGears[Pair(it.first, i)] = 0}
@@ -26,15 +26,14 @@ fun main(){
     println(part2)
 }
 
-//var1: Number var2: Symbol
-fun adjacent(var1: Pair<Int, Int>, var2: Pair<Int, Int>, length: Int): Boolean {
-    return var2.first in var1.first-1..var1.first+length
-            && var2.second in var1.second-1..var1.second+1
+fun adjacent(number: Pair<Int, Int>, symbol: Pair<Int, Int>, length: Int): Boolean {
+    return symbol.first in number.first-1..number.first+length
+            && symbol.second in number.second-1..number.second+1
 }
 
-fun String?.indexesOf(substr: String, ignoreCase: Boolean = true): List<Pair<Int, Int>> {
+fun String?.indexesOf(pattern: String, ignoreCase: Boolean = true): List<Pair<Int, Int>> {
     return this?.let {
-        val regex = if (ignoreCase) Regex(substr, RegexOption.IGNORE_CASE) else Regex(substr)
-        regex.findAll(this).map { Pair(it.range.start, it.value.length) }.toList()
+        val regex = if (ignoreCase) Regex(pattern, RegexOption.IGNORE_CASE) else Regex(pattern)
+        regex.findAll(this).map { Pair(it.range.first, it.value.length) }.toList()
     } ?: emptyList()
 }
