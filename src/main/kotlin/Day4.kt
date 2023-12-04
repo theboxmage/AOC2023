@@ -5,6 +5,7 @@ fun main(){
     val text = File("Data/D4P1.txt").readLines()
         .map{it.substring(it.indexOf(":")+2).split("|")
         .map{i -> i.split(" ").filter{str -> str.trim() != "" }.map{num -> num.toDouble()}}}
+
     println(text.sumOf{
         val temp = 2.0.pow(((it[0].count { i -> it[1].contains(i) }) - 1))
         if (temp == 0.5) 0 else temp.toInt()
