@@ -15,13 +15,13 @@ fun main(){
         indexSymbols.any{symbol -> adjacent(number.key, symbol.key, number.value)}}
         .map{text[it.key.second].substring(it.key.first,it.key.first+it.value)}.sumOf { it.toInt() }
     )
-    var part2 = 0L
-    maybeGears.forEach {gear ->
-        val count = indexNumbers.filter{adjacent(it.key, gear.key, it.value)}
+
+    val part2 = maybeGears.keys.sumOf {gear ->
+        val count = indexNumbers.filter{adjacent(it.key, gear, it.value)}
             .map{text[it.key.second].substring(it.key.first,it.key.first+it.value)}
             .map{it.toInt()}
 
-        part2 += if(count.size != 2) 0 else count.reduce{a, b -> a*b}
+        if(count.size != 2) 0 else count.reduce{a, b -> a*b}
     }
     println(part2)
 }
